@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<!-- Autores: giovannig e brunnom -->
+	
+        <title>Relatório de Atividades Físicas</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <style type='text/css'>
+            body{
+                font-family:'Lucida Casual', 'Comic Sans MS';
+            }
+            td{
+                text-align: center;
+            }
+            th{
+                text-align: center;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <script language="javascript">
+            function adicionarLinha(){  
+                var local=document.getElementById('tabela');  
+                var tblBody = local.tBodies[0];  
+                var newRow = tblBody.insertRow(-1);  
+
+                var newCell0 = newRow.insertCell(0);  
+                newCell0.innerHTML = document.getElementById("tempo").value + "h";   
+
+                var newCell1 = newRow.insertCell(1);  
+                newCell1.innerHTML = document.getElementById("atividade").value;  
+
+                var newCell2 = newRow.insertCell(2);  
+                newCell2.innerHTML = document.getElementById("data").value;
+				
+				procedimentos();
+            }
+            function procedimentos(){
+                document.getElementById("contador").innerHTML = (parseInt(document.getElementById("contador").innerHTML) + parseInt(document.getElementById("tempo").value));
+				document.getElementById("tempo").value = "";
+                document.getElementById("atividade").value = "Corrida";
+                document.getElementById("data").value = "";
+            }
+			 function mascaraData(campoData){
+              var data = campoData.value;
+              if (data.length == 2){
+                  data = data + '/';
+                  document.forms[0].data.value = data;
+					return true;              
+				}
+              if (data.length == 5){
+                  data = data + '/';
+                  document.forms[0].data.value = data;
+                  return true;
+				}
+			}
+			
+			function validaData(){
+			
+			}
+        </script>
+       
+        <center><h1>Log de Exercícios</h1></center>
+        <form>
+            <fieldset style ="width: 400px; position: absolute; left: 50%; margin-left: -190px;">
+                <legend>Adicionar Exercício</legend>
+                <input type="text" id="tempo" size="5"><span>horas</span>
+                <select id="atividade"> </br>
+                    <option value="Corrida">Corrida</option>
+                    <option value="Natação">Natação</option>
+                    <option value="Bicicleta">Bicicleta</option>
+                <input type="text" id="data" OnKeyUp="mascaraData(this);" maxlength="10">
+                <button type="button" onclick="adicionarLinha();">Add</button>
+                </select>
+            </fieldset>
+        </form>
+        <table border='1' id="tabela" style ='border-style:solid; width: 430px; position: absolute; left: 50%; margin-left: -191px; margin-top: 100px'>
+            <tr>  
+                <th>Tempo</th>  
+                <th>Atividade</th>  
+                <th>Data</th>  
+            </tr>  
+        </table>
+        <span>Você fez <span id = "contador">0</span>h de exercícios</span>
+    </body>
+</html>
